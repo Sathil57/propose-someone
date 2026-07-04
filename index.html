@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💌 A Special Message for You</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- 🌌 PARALLAX BACKGROUND SYSTEM -->
+    <div class="parallax-container">
+        <div class="bg-layer bg-deep" id="bg-layer-1"></div>
+        <div class="bg-layer bg-stars" id="bg-layer-2"></div>
+        <div class="bg-layer bg-glow" id="bg-layer-3"></div>
+    </div>
+
+    <!-- ✨ MAGIC CURSOR CONTAINER -->
+    <div id="magic-cursor-container"></div>
+
+    <!-- ═══ SCREEN 0: BUILDER UI (VISIBLE BY DEFAULT) ═══ -->
+    <section id="s-builder" class="screen fade-transition active">
+        <!-- Active by default; script.js will switch it if URL has parameters -->
+        <div class="center-col z-top">
+            <div class="glass-container builder-box">
+                <h2 class="section-title glass-text" style="font-size: 2.2rem; margin-bottom: 5px;">Create Your Proposal
+                    ✨</h2>
+                <p class="prop-sub" style="font-size: 0.95rem; margin-bottom: 20px;">No coding required. Generate a
+                    custom link to send her!</p>
+
+                <div class="input-group">
+                    <label>Her Name</label>
+                    <input type="text" id="b-name" placeholder="E.g. Ananya" />
+                </div>
+
+                <div class="input-group">
+                    <label>Your Love Letter</label>
+                    <textarea id="b-letter" rows="4" placeholder="Every time I see you..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>Photo URLs (Optional - Direct image links)</label>
+                    <input type="text" id="b-p1" placeholder="Photo 1 URL" />
+                    <input type="text" id="b-p2" placeholder="Photo 2 URL" />
+                    <input type="text" id="b-p3" placeholder="Photo 3 URL" />
+                </div>
+
+                <div class="input-group">
+                    <label>Secret Notification Key (Web3Forms)</label>
+                    <input type="text" id="b-key" placeholder="Paste Access Key to get emailed when she says Yes!" />
+                    <p class="hint-text" style="margin-top:4px; text-transform:none; font-size:0.75rem;">Get a free key
+                        from web3forms.com. Leave empty if you don't want an email.</p>
+                </div>
+
+                <button id="btn-generate" class="btn-primary glow-button"
+                    style="width: 100%; margin-top: 10px;">Generate Magic Link 🪄</button>
+
+                <!-- Result Box -->
+                <div id="result-box" class="result-box" style="display:none; margin-top: 20px;">
+                    <p style="font-size: 0.9rem; margin-bottom: 8px;">Your custom link is ready!</p>
+                    <textarea id="b-link" readonly rows="3"
+                        style="width: 100%; padding: 8px; font-size: 0.8rem; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); color: #fff; margin-bottom: 10px;"></textarea>
+                    <button id="btn-copy" class="btn-glass outline" style="width: 100%;">Copy Link to Clipboard
+                        📋</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 1: LANDING ═══ -->
+    <section id="s-landing" class="screen fade-transition">
+        <div class="center-col">
+            <p class="subtitle glass-text">Someone has a very special message for you…</p>
+            <div id="env-wrap" class="env-wrap">
+                <div id="env" class="env">
+                    <div class="env-flap"></div>
+                    <div class="env-body"><span class="env-icon">💌</span></div>
+                </div>
+                <p class="hint-text pulse-anim">✦ Click to open ✦</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 2: MEMORY LANE ═══ -->
+    <section id="s-memory" class="screen fade-transition">
+        <div class="center-col">
+            <h2 class="section-title glass-text">A walk down memory lane...</h2>
+
+            <div class="polaroid-gallery">
+                <!-- Images injected by JS -->
+                <div class="polaroid p-1">
+                    <div class="photo">
+                        <img id="img-p1" src="" alt="Memory 1" />
+                    </div>
+                    <p class="caption">The first time we met ✨</p>
+                </div>
+                <div class="polaroid p-2">
+                    <div class="photo">
+                        <img id="img-p2" src="" alt="Memory 2" />
+                    </div>
+                    <p class="caption">Endless laughs & coffee ☕</p>
+                </div>
+                <div class="polaroid p-3">
+                    <div class="photo">
+                        <img id="img-p3" src="" alt="Memory 3" />
+                    </div>
+                    <p class="caption">Every moment is magic 💖</p>
+                </div>
+            </div>
+
+            <button id="btn-to-letter" class="btn-glass">Read My Letter →</button>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 3: LETTER ═══ -->
+    <section id="s-letter" class="screen fade-transition">
+        <div class="letter-wrap">
+            <div class="glass-card">
+                <div class="card-glow"></div>
+                <div class="letter-content">
+                    <div class="letter-deco">💕 ✨ 💕</div>
+                    <p class="letter-dear">My Dearest,</p>
+                    <p id="letter-body" class="letter-body"></p>
+                    <p class="letter-close">With all my heart,</p>
+                    <p class="letter-sig">— Someone who adores you 💖</p>
+
+                    <div class="btn-container">
+                        <button id="btn-next" class="btn-primary glow-button" style="display:none">The Big Question
+                            →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 4: PROPOSAL ═══ -->
+    <section id="s-proposal" class="screen fade-transition">
+        <div class="center-col z-top">
+            <div class="big-heart cinematic-beat">💖</div>
+            <div class="glass-container proposal-box">
+                <h1 id="prop-q" class="prop-text gradient-text"></h1>
+                <p class="prop-sub">You make my world brighter every single day.</p>
+                <div class="prop-btns">
+                    <button id="btn-yes" class="btn-primary glow-button">Yes! 💍</button>
+                    <button id="btn-no" class="btn-glass outline">Maybe later…</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCREEN 5: CELEBRATE ═══ -->
+    <section id="s-celebrate" class="screen fade-transition">
+        <canvas id="confetti"></canvas>
+        <div class="center-col z-top">
+            <div class="celebrate-icon bounce-in">🥂</div>
+            <div class="glass-card celebrate-box">
+                <h1 id="cel-title" class="cel-title gradient-text"></h1>
+                <p class="cel-sub">This is just the beginning of our beautiful story.</p>
+                <div id="cel-hearts" class="cel-hearts"></div>
+                <p class="cel-sub"
+                    style="opacity:0; animation: fadeUp 1s ease 2s both; font-size: 0.95rem; color: #ff80ab;">
+                    ✨ P.S. A secret little bird just flew off to tell him your answer! ✨
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
